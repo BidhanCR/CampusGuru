@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Rating from "react-rating";
@@ -7,7 +7,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch("https://campus-guru-server.vercel.app/reviews")
       .then((response) => response.json())
       .then((data) => setReviews(data));
   }, []);
@@ -50,7 +50,6 @@ const Reviews = () => {
                   fullSymbol={<FaStar style={starStyles} />}
                   readonly
                 />
-                
               </div>
             </div>
           ))}

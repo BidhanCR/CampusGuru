@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import Swal from 'sweetalert2';
+import { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Admission = () => {
   const [colleges, setColleges] = useState([]);
@@ -9,7 +9,7 @@ const Admission = () => {
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/colleges")
+    fetch("https://campus-guru-server.vercel.app/colleges")
       .then((response) => response.json())
       .then((data) => setColleges(data))
       .catch((error) => console.error("Error fetching college data:", error));
@@ -19,12 +19,12 @@ const Admission = () => {
     setSelectedCollege(college);
     // Reset the form fields when a new college is clicked
     reset({
-      candidateName: '',
-      subject: '',
-      candidateEmail: '',
-      candidatePhone: '',
-      address: '',
-      dateOfBirth: '',
+      candidateName: "",
+      subject: "",
+      candidateEmail: "",
+      candidatePhone: "",
+      address: "",
+      dateOfBirth: "",
       image: null,
     });
   };
@@ -57,13 +57,16 @@ const Admission = () => {
         image: imageUrl, // Use the uploaded image URL
       };
 
-      const admissionResponse = await fetch("http://localhost:5000/admission", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(AdmissionData),
-      });
+      const admissionResponse = await fetch(
+        "https://campus-guru-server.vercel.app/admission",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(AdmissionData),
+        }
+      );
 
       const responseData = await admissionResponse.json();
       if (responseData.insertedId) {
@@ -82,11 +85,11 @@ const Admission = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gray-100'>
-      <div className='space-y-4'>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gray-100">
+      <div className="space-y-4">
         {colleges.map((college) => (
           <p
-            className='cursor-pointer text-center p-2 rounded-md hover:bg-blue-400 hover:text-white'
+            className="cursor-pointer text-center p-2 rounded-md hover:bg-blue-400 hover:text-white"
             key={college._id}
             onClick={() => handleCollegeClick(college)}
           >
@@ -96,123 +99,125 @@ const Admission = () => {
       </div>
       <div>
         {selectedCollege && (
-          <div className='bg-white rounded-lg shadow-md p-6'>
-            <h2 className='text-2xl font-semibold mb-4'>Admission Form for {selectedCollege.name}</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-semibold mb-4">
+              Admission Form for {selectedCollege.name}
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Input fields */}
-              <div className='grid grid-cols-2 gap-4'>
-                <label className='block'>
-                  <span className='text-gray-700'>Candidate Name:</span>
+              <div className="grid grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="text-gray-700">Candidate Name:</span>
                   <Controller
-                    name='candidateName'
+                    name="candidateName"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='text'
+                        type="text"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Subject:</span>
+                <label className="block">
+                  <span className="text-gray-700">Subject:</span>
                   <Controller
-                    name='subject'
+                    name="subject"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='text'
+                        type="text"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Candidate Email:</span>
+                <label className="block">
+                  <span className="text-gray-700">Candidate Email:</span>
                   <Controller
-                    name='candidateEmail'
+                    name="candidateEmail"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='email'
+                        type="email"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Candidate Phone number:</span>
+                <label className="block">
+                  <span className="text-gray-700">Candidate Phone number:</span>
                   <Controller
-                    name='candidatePhone'
+                    name="candidatePhone"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='tel'
+                        type="tel"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Address:</span>
+                <label className="block">
+                  <span className="text-gray-700">Address:</span>
                   <Controller
-                    name='address'
+                    name="address"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='text'
+                        type="text"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Date of Birth:</span>
+                <label className="block">
+                  <span className="text-gray-700">Date of Birth:</span>
                   <Controller
-                    name='dateOfBirth'
+                    name="dateOfBirth"
                     control={control}
-                    defaultValue=''
+                    defaultValue=""
                     render={({ field }) => (
                       <input
-                        type='date'
+                        type="date"
                         {...field}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
-                <label className='block'>
-                  <span className='text-gray-700'>Image:</span>
+                <label className="block">
+                  <span className="text-gray-700">Image:</span>
                   <Controller
-                    name='image'
+                    name="image"
                     control={control}
                     defaultValue={null}
                     render={({ field }) => (
                       <input
-                        type='file'
+                        type="file"
                         onChange={(e) => {
                           setImageFile(e.target.files[0]);
                           field.onChange(e.target.files[0]);
                         }}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200'
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200"
                       />
                     )}
                   />
                 </label>
               </div>
               <button
-                type='submit'
-                className='mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-200'
+                type="submit"
+                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
               >
                 Submit
               </button>
@@ -225,6 +230,3 @@ const Admission = () => {
 };
 
 export default Admission;
-
-
-

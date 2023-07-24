@@ -50,7 +50,7 @@ const RegisterForm = () => {
                   image: photoUrl,
                   account_created_date: new Date(),
                 };
-                fetch("http://localhost:5000/users", {
+                fetch("https://campus-guru-server.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -209,7 +209,10 @@ const RegisterForm = () => {
               {loading ? "Creating Account..." : "Create Account"}
             </button>
             <p>
-              Have an Account? <Link className="btn-link" to={"/login"}>Login here</Link>
+              Have an Account?{" "}
+              <Link className="btn-link" to={"/login"}>
+                Login here
+              </Link>
             </p>
           </form>
         </div>
